@@ -14,7 +14,7 @@
 
 ## Description
 
-Application uses
+Application allows user to select their team and adjust their job role while including their information.
 
 ## Installation
 
