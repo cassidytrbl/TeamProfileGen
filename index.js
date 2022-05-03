@@ -133,3 +133,22 @@ function initInternQuestions() {
       addEmployee();
     });
 }
+
+function addEmployee() {
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "newEmployee",
+        message: "Would you like to add new Employee?",
+        choices: ["Yes", "No"],
+      },
+    ])
+    .then(function (secondChoice) {
+      if (secondChoice.NewEmployee === "Yes") {
+        initPromptLoop();
+      } else {
+        generateHTML(managerArray, engineerArray, internArray);
+      }
+    });
+}
