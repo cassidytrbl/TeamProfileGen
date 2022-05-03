@@ -17,7 +17,7 @@ function initPromptLoop() {
     .prompt({
       type: "list",
       message: "What is your title?",
-      name: "position",
+      name: "role",
       choices: ["Manager", "Engineer", "Intern"],
     })
     .then((choice) => {
@@ -60,4 +60,24 @@ function initManagerQuestions() {
       managerArray.push(newManager);
       addNewEmployee();
     });
+}
+
+function initEngineerQuestions() {
+  inquirer.prompt([
+    {
+      type: "input",
+      name: "name",
+      message: "Enter your name:",
+    },
+    {
+      type: "input",
+      name: "email",
+      message: "Enter your email:",
+    },
+    {
+      type: "input",
+      name: "id",
+      message: "Enter your ID number:",
+    },
+  ]);
 }
