@@ -63,21 +63,73 @@ function initManagerQuestions() {
 }
 
 function initEngineerQuestions() {
-  inquirer.prompt([
-    {
-      type: "input",
-      name: "name",
-      message: "Enter your name:",
-    },
-    {
-      type: "input",
-      name: "email",
-      message: "Enter your email:",
-    },
-    {
-      type: "input",
-      name: "id",
-      message: "Enter your ID number:",
-    },
-  ]);
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "Enter your name:",
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "Enter your email:",
+      },
+      {
+        type: "input",
+        name: "id",
+        message: "Enter your ID number:",
+      },
+      {
+        type: "input",
+        name: "githubUserName",
+        message: "Enter your GitHub Username:",
+      },
+    ])
+    .then(function (response) {
+      const newEngineer = new engineer(
+        response.name,
+        response.id,
+        response.email,
+        response.githubUserName
+      );
+      engineerArray.push(newEngineer);
+      addEmployee();
+    });
+}
+
+function initInternQuestions() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "name",
+        message: "Enter your name:",
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "Enter your email:",
+      },
+      {
+        type: "input",
+        name: "id",
+        message: "Enter your ID number:",
+      },
+      {
+        type: "input",
+        name: "githubUserName",
+        message: "Enter your GitHub Username:",
+      },
+    ])
+    .then(function (response) {
+      const newIntern = new intern(
+        response.name,
+        response.id,
+        response.email,
+        response.githubUserName
+      );
+      engineerArray.push(newIntern);
+      addEmployee();
+    });
 }
