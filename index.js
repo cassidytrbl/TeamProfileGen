@@ -2,12 +2,12 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
-const manager = require("./employees/Manager");
+const manager = require("./employees/Manger");
 const engineer = require("./employees/Engineer");
 const intern = require("./employees/Intern");
 const engineerCard = require("./src/engineerCard");
 const internCard = require("./src/internCard");
-const internCard = require("./src/internCard");
+const Manager = require("./employees/Manger");
 
 let managerArray = [];
 let engineerArray = [];
@@ -22,7 +22,7 @@ function initPromptLoop() {
       choices: ["Manager", "Engineer", "Intern"],
     })
     .then((choice) => {
-      const employeeRole = choice.position;
+      const employeeRole = choice.role;
       if (employeeRole === "Manager") {
         initManagerQuestions();
       } else if (employeeRole === "Engineer") {
@@ -51,12 +51,18 @@ function initManagerQuestions() {
         name: "id",
         message: "Enter your ID number:",
       },
+      {
+        type: "input",
+        name: "officeNum",
+        message: "Enter your Office Number:",
+      },
     ])
     .then(function (response) {
       const newManager = new manager(
         response.name,
         response.id,
-        response.email
+        response.email,
+        response.officeNum
       );
       managerArray.push(newManager);
       addNewEmployee();
@@ -95,7 +101,7 @@ function initEngineerQuestions() {
         response.githubUserName
       );
       engineerArray.push(newEngineer);
-      addEmployee();
+      addNewEmployee();
     });
 }
 
@@ -130,12 +136,12 @@ function initInternQuestions() {
         response.email,
         response.githubUserName
       );
-      engineerArray.push(newIntern);
-      addEmployee();
+      internArray.push(newIntern);
+      addNewEmployee();
     });
 }
 
-function addEmployee() {
+function addNewEmployee() {
   inquirer
     .prompt([
       {
@@ -146,64 +152,64 @@ function addEmployee() {
       },
     ])
     .then(function (secondChoice) {
-      if (secondChoice.NewEmployee === "Yes") {
+      if (secondChoice.newEmployee === "Yes") {
         initPromptLoop();
       } else {
-        generateHTML(engineerArray, internArray);
+        generateHTML(managerArray, engineerArray, internArray);
       }
     });
 }
 
-function generateMgnrCrd(managerArray) {
-  const managerCard = managerArray
-    .map((element) => {
-      return `<div class ="w3-quarter" id="Engineer">
-    <h4>${mgnrcrd.getName()}</h4>
-    <h4>${mgnrcrd.getRole()}</h4>
-    <h5>${mgnrcrd.getID()}</h5>
-    <h5>${mgnrcrd.getEmail()}</h5>
-    <h5>${mgnrcrd.getGithub()}</h5>
-    </div>`;
-    })
-    .join("");
-  return managerCard;
-}
+function generateHTML(managerArray, engineerArray, internArray) {
+  var employeeArray = [managerArray, engineerArray, internArray];
+  console.log(employeeArray);
+  // for (var i = 0; i < employeeArray.length; i++) {
+  const output = "./dist/index.html";
 
-function generateHTML(engineerArray, internArray) {
-  var employeeArray = [engineerArray, internArray];
-  for (var i = 0; i < employeeArray.length; i++) {
-    const output = "./dist/index.html";
-    console.log(employeeArray);
-
-    function generateEngiCrd(engineerArray) {
-      const engineerCard = engineerArray
-        .map((element) => {
-          return `<div class="w3-quarter" id="Engineer">
+  function generateMgnrCrd(managerArray) {
+    const managerCard = managerArray
+      .map((mgnrcrd) => {
+        return `<div class ="w3-quarter Manager">
+        <h4>${mgnrcrd.getName()}</h4>
+        <h4>${mgnrcrd.getRole()}</h4>
+        <h5>${mgnrcrd.getID()}</h5>
+        <h5>${mgnrcrd.getEmail()}</h5>
+        <h5>${mgnrcrd.getGithub()}</h5>
+        </div>`;
+      })
+      .join("");
+    return managerCard;
+  }
+  function generateEngiCrd(engineerArray) {
+    const engineerCard = engineerArray
+      .map((engicrd) => {
+        return `<div class="w3-quarter Engineer">
         <h4>${engicrd.getName()}</h4>
         <h4>${engicrd.getRole()}</h4>
         <h5>${engicrd.getID()}</h5>
         <h5>${engicrd.getEmail()}</h5>
         <h5>${engicrd.getGithub()}</h5>
         </div>`;
-        })
-        .join("");
-      return engineerCard;
-    }
-    function generateItrnCrd(internArray) {
-      const internCard = internCard
-        .map((element) => {
-          return `<div class="w3-quarter" id="Engineer">
+      })
+      .join("");
+    return engineerCard;
+  }
+
+  function generateItrnCrd(internArray) {
+    const internCard = internArray
+      .map((itrncrd) => {
+        return `<div class="w3-quarter Intern">
         <h4>${itrncrd.getName()}</h4>
         <h4>${itrncrd.getRole()}</h4>
         <h5>${itrncrd.getID()}</h5>
         <h5>${itrncrd.getEmail()}</h5>
         <h5>${itrncrd.getGithub()}</h5>
         </div>`;
-        })
-        .join("");
-      return internCard;
-    }
-    const string = `<!DOCTYPE html>
+      })
+      .join("");
+    return internCard;
+  }
+  const string = `<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -227,6 +233,12 @@ function generateHTML(engineerArray, internArray) {
                 <div class="w3-right w3-padding-16"></div>
                 <div class="w3-center w3-padding-16">My Team</div>
         </div>
+        ${generateMgnrCrd(managerArray)}
+        ${generateEngiCrd(engineerArray)}
+        ${generateItrnCrd(internArray)}
+    </body>   
+    </html>
     `;
-  }
+  // }
 }
+initPromptLoop();
