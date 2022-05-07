@@ -7,6 +7,7 @@ const engineer = require("./employees/Engineer");
 const intern = require("./employees/Intern");
 const engineerCard = require("./src/engineerCard");
 const internCard = require("./src/internCard");
+const internCard = require("./src/internCard");
 
 let managerArray = [];
 let engineerArray = [];
@@ -148,7 +149,84 @@ function addEmployee() {
       if (secondChoice.NewEmployee === "Yes") {
         initPromptLoop();
       } else {
-        generateHTML(managerArray, engineerArray, internArray);
+        generateHTML(engineerArray, internArray);
       }
     });
+}
+
+function generateMgnrCrd(managerArray) {
+  const managerCard = managerArray
+    .map((element) => {
+      return `<div class ="w3-quarter" id="Engineer">
+    <h4>${mgnrcrd.getName()}</h4>
+    <h4>${mgnrcrd.getRole()}</h4>
+    <h5>${mgnrcrd.getID()}</h5>
+    <h5>${mgnrcrd.getEmail()}</h5>
+    <h5>${mgnrcrd.getGithub()}</h5>
+    </div>`;
+    })
+    .join("");
+  return managerCard;
+}
+
+function generateHTML(engineerArray, internArray) {
+  var employeeArray = [engineerArray, internArray];
+  for (var i = 0; i < employeeArray.length; i++) {
+    const output = "./dist/index.html";
+    console.log(employeeArray);
+
+    function generateEngiCrd(engineerArray) {
+      const engineerCard = engineerArray
+        .map((element) => {
+          return `<div class="w3-quarter" id="Engineer">
+        <h4>${engicrd.getName()}</h4>
+        <h4>${engicrd.getRole()}</h4>
+        <h5>${engicrd.getID()}</h5>
+        <h5>${engicrd.getEmail()}</h5>
+        <h5>${engicrd.getGithub()}</h5>
+        </div>`;
+        })
+        .join("");
+      return engineerCard;
+    }
+    function generateItrnCrd(internArray) {
+      const internCard = internCard
+        .map((element) => {
+          return `<div class="w3-quarter" id="Engineer">
+        <h4>${itrncrd.getName()}</h4>
+        <h4>${itrncrd.getRole()}</h4>
+        <h5>${itrncrd.getID()}</h5>
+        <h5>${itrncrd.getEmail()}</h5>
+        <h5>${itrncrd.getGithub()}</h5>
+        </div>`;
+        })
+        .join("");
+      return internCard;
+    }
+    const string = `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Team Profile</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+        <style>
+        body,h1,h2,h3,h4,h5 {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .w3-bar-block .w3-bar-item {
+            padding: 25px;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="w3-top">
+            <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
+                <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()"></div>
+                <div class="w3-right w3-padding-16"></div>
+                <div class="w3-center w3-padding-16">My Team</div>
+        </div>
+    `;
+  }
 }
