@@ -5,9 +5,6 @@ const fs = require("fs");
 const manager = require("./employees/Manger");
 const engineer = require("./employees/Engineer");
 const intern = require("./employees/Intern");
-const engineerCard = require("./src/engineerCard");
-const internCard = require("./src/internCard");
-const Manager = require("./employees/Manger");
 
 let managerArray = [];
 let engineerArray = [];
@@ -125,8 +122,8 @@ function initInternQuestions() {
       },
       {
         type: "input",
-        name: "githubUserName",
-        message: "Enter your GitHub Username:",
+        name: "school",
+        message: "Enter your school name:",
       },
     ])
     .then(function (response) {
@@ -134,7 +131,7 @@ function initInternQuestions() {
         response.name,
         response.id,
         response.email,
-        response.githubUserName
+        response.school
       );
       internArray.push(newIntern);
       addNewEmployee();
@@ -174,7 +171,6 @@ function generateHTML(managerArray, engineerArray, internArray) {
         <h4>${mgnrcrd.getRole()}</h4>
         <h5>${mgnrcrd.getID()}</h5>
         <h5>${mgnrcrd.getEmail()}</h5>
-        <h5>${mgnrcrd.getGithub()}</h5>
         </div>`;
       })
       .join("");
@@ -203,7 +199,7 @@ function generateHTML(managerArray, engineerArray, internArray) {
         <h4>${itrncrd.getRole()}</h4>
         <h5>${itrncrd.getID()}</h5>
         <h5>${itrncrd.getEmail()}</h5>
-        <h5>${itrncrd.getGithub()}</h5>
+        <h5>${itrncrd.getSchool()}</h5>
         </div>`;
       })
       .join("");
@@ -239,6 +235,17 @@ function generateHTML(managerArray, engineerArray, internArray) {
     </body>   
     </html>
     `;
-  // }
+  function writeToFile(managerArray, engineerArray, internArray) {
+    return fs.writeFileSync(path.join(process.cwd(), "OutputIndex.html"), data);
+  }
+  function init() {
+    const prompt = inquirer.createPromptModule();
+    prompt(generateHTML).then((answers) => {
+      const generatedMarkdown = generatedMarkdown(answers);
+      writeToFile(generatedMarkdown);
+    });
+  }
+  //}
 }
+
 initPromptLoop();
