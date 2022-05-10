@@ -235,16 +235,10 @@ function generateHTML(managerArray, engineerArray, internArray) {
     </body>   
     </html>
     `;
-  function writeToFile(managerArray, engineerArray, internArray) {
-    return fs.writeFileSync(path.join(process.cwd(), "OutputIndex.html"), data);
+  function writeToFile(path, html) {
+    return fs.writeFileSync(path.join(process.cwd(), path), html);
   }
-  function init() {
-    const prompt = inquirer.createPromptModule();
-    prompt(generateHTML).then((answers) => {
-      const generatedMarkdown = generatedMarkdown(answers);
-      writeToFile(generatedMarkdown);
-    });
-  }
+  writeToFile(output, string);
   //}
 }
 
