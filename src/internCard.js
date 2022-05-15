@@ -4,7 +4,7 @@ function internCard(itrncrd) {
       <h4>${itrncrd.getRole()}</h4>
       <h5>${itrncrd.getID()}</h5>
       <h5>${itrncrd.getEmail()}</h5>
-      <h5>${itrncrd.getGithub()}</h5>
+      <h5>${itrncrd.getSchool()}</h5>
       </div>`;
 }
 module.exports = internCard;
