@@ -1,50 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team Profile</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-    <style>
-    body,h1,h2,h3,h4,h5 {
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    }
-    .w3-bar-block .w3-bar-item {
-        padding: 25px;
-    }
-    </style>
-</head>
-<body>
-    <div class="w3-top">
-        <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
-            <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()"></div>
-            <div class="w3-right w3-padding-16"></div>
-            <div class="w3-center w3-padding-16">My Team</div>
-    </div>
-
-    <div class="w3-row-padding w3-padding-16 w3-center" id="container">
-        <div class="w3-quarter" id="Manager">
-            <h4>Name</h4>
-            <h4>Manager</h4>
-            <h5>ID</h5>
-            <h5>Email</h5>
-            <h5>Github</h5>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Team Profile</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+        <style>
+        body,h1,h2,h3,h4,h5 {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .w3-bar-block .w3-bar-item {
+            padding: 25px;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="w3-top">
+            <div class="w3-white w3-xlarge" style="max-width:1200px;margin:auto">
+                <div class="w3-button w3-padding-16 w3-left" onclick="w3_open()"></div>
+                <div class="w3-right w3-padding-16"></div>
+                <div class="w3-center w3-padding-16">My Team</div>
         </div>
-        <div class="w3-quarter" id="Engineer">
-            <h4>Name</h4>
-            <h4>Engineer</h4>
-            <h5>ID</h5>
-            <h5>Email</h5>
-            <h5>Github</h5>
+        <div class ="w3-quarter Manager">
+        <h4></h4>
+        <h4>Manager</h4>
+        <h5></h5>
+        <h5></h5>
         </div>
-        <div class="w3-quarter" id="Intern">
-            <h4>Name</h4>
-            <h4>Intern</h4>
-            <h5>ID</h5>
-            <h5>Email</h5>
-            <h5>Github</h5>
+        <div class="w3-quarter Engineer">
+        <h4></h4>
+        <h4>Engineer</h4>
+        <h5></h5>
+        <h5></h5>
+        <h5></h5>
         </div>
-    </div>
-</body>
-</html>
+        <div class="w3-quarter Intern">
+        <h4></h4>
+        <h4>class Intern extends Employee {
+  constructor(name, id, email, school) {
+    super(name, id, email);
+    this.School = school;
+  }
+  getRole() {
+    return Intern;
+  }
+  getSchool() {
+    return this.School;
+  }
+}</h4>
+        <h5></h5>
+        <h5></h5>
+        <h5></h5>
+        </div>
+    </body>   
+    </html>
+    

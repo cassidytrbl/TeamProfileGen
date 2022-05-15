@@ -205,7 +205,7 @@ function generateHTML(managerArray, engineerArray, internArray) {
       .join("");
     return internCard;
   }
-  const string = `<!DOCTYPE html>
+  const html = `<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -235,10 +235,10 @@ function generateHTML(managerArray, engineerArray, internArray) {
     </body>   
     </html>
     `;
-  function writeToFile(path, html) {
-    return fs.writeFileSync(path.join(process.cwd(), path), html);
+  function writeToFile(filepath, html) {
+    return fs.writeFileSync(path.join(process.cwd(), filepath), html);
   }
-  writeToFile(output, string);
+  writeToFile(output, html);
   //}
 }
 
